@@ -8,6 +8,7 @@ import UserList from './components/UserList.jsx'
 function App() {
   const logout = async ()=>{
     localStorage.setItem('token', '')
+    alert('Deslogeo exitoso')
   }
   return (
     <>
