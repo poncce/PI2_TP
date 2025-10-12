@@ -1,6 +1,6 @@
 🚀 Instalación
 
-Sigue estos pasos para poner en marcha el proyecto:
+Seguir estos pasos para arrancar el laburo:
 
 📥 Descargar o clonar el repositorio
 
