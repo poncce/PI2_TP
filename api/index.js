@@ -33,7 +33,7 @@ server.post('/admin/create', createAdmin)   // checkear con malcos
 
 server.listen(3000, async () => {
     await sequelize.sync({ force: false })
-    console.log('El server esta ejecutandose en el puerto 3000');
+    console.log('El server se esta ejecutando en el puerto 3000');
 
 })
 
