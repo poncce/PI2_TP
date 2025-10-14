@@ -34,4 +34,4 @@ npm start
 
 
 
-documento nefasto sujeto a cambios 
+Documento sujeto a futuros cambios
