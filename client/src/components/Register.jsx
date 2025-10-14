@@ -16,6 +16,7 @@ function Register() {
         })
         // localStorage.setItem('token', response.data.token)
         console.log(response.data);
+        alert('registradovich')
         
     }
 
