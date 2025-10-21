@@ -1,4 +1,4 @@
-const { Post } = require('../models/Posts');
+const { Post } = require('../models/Post');
 
 const createPost = async (req, res) => {
   const autorId = req.user.id; 
