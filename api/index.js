@@ -16,7 +16,7 @@ const { createPost } = require('./controller/post');
 // Middlewares
 const { isAuth, isAdmin } = require('./middlewares/auth');
 const { checkUserStatus } = require('./middlewares/checkUserStatus');
-const { agregarComentario } = require('./controller/comment');
+const { agregarComentario: addComment } = require('./controller/comment');
 
 const server = express();
 server.use(express.json());
@@ -49,7 +49,7 @@ server.post('/posts', isAuth, checkUserStatus, createPost);
 
 
 // Comentarios
-server.post('/posts/:postId/comments', isAuth, checkUserStatus, agregarComentario)
+server.post('/posts/:postId/comments', isAuth, checkUserStatus, addComment)
 
 
 

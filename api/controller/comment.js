@@ -1,7 +1,7 @@
 const { Comment } = require("../models/Comment");
 const { Post } = require("../models/Post");
 
-async function agregarComentario(req, res) {
+async function addComment(req, res) {
   const { postId } = req.params;    
   const autorId = req.user.id;       
   const { contenido } = req.body;   
@@ -29,5 +29,5 @@ async function agregarComentario(req, res) {
 }
 
 module.exports = {
-  agregarComentario
+  agregarComentario: addComment
 }
