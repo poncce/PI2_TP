@@ -1,9 +1,7 @@
 const { User } = require("../models/User")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const { Calification } = require("../models/Califications")
-const { Permission } = require("../models/Perms")
-const { Post } = require("../models/Posts")
+
 
 const SECRET = 'misecreto'
 
@@ -22,14 +20,15 @@ const getActiveUserProfile = async (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-    const { firstName, lastName, email, password } = req.body
+    const { firstName, lastName, email, password, estado } = req.body
     const hashedPassword = await bcrypt.hash(password, 10)
     const user = await User.create({
         firstName,
         lastName,
         email,
         password: hashedPassword,
-        isAdmin: false
+        isAdmin: false,
+        estado
     })
     res.json(user)
 }
@@ -70,10 +69,6 @@ const createAdmin = async (req, res) => {                           // checkear 
     })
     res.json(user)
 }
-
-
-
-
 
 module.exports = {
     getActiveUsers,
