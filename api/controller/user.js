@@ -1,13 +1,25 @@
 const { User } = require("../models/User")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { Calification } = require("../models/Califications")
+const { Permission } = require("../models/Perms")
+const { Post } = require("../models/Posts")
 
 const SECRET = 'misecreto'
 
-const getUsers = async (req, res) => {
+const getActiveUsers = async (req, res) => {
     const users = await User.findAll({ attributes: { exclude: ['password'] } })
     res.json(users)
 }
+
+
+const getActiveUserProfile = async (req, res) => {
+    const user = await User.findByPk(req.user.id, { attributes: { exclude: ['password'] } });
+    if (!user) {
+        return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+    res.json(user);
+};
 
 const registerUser = async (req, res) => {
     const { firstName, lastName, email, password } = req.body
@@ -22,6 +34,7 @@ const registerUser = async (req, res) => {
     res.json(user)
 }
 
+       
 
 const login = async (req, res) => {
     const { email, password } = req.body
@@ -59,8 +72,12 @@ const createAdmin = async (req, res) => {                           // checkear 
 }
 
 
+
+
+
 module.exports = {
-    getUsers,
+    getActiveUsers,
+    getActiveUserProfile,
     registerUser,
     createAdmin,
     login,

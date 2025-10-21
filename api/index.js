@@ -1,10 +1,15 @@
 // index
 const express = require('express');
 const { sayHello } = require('./controller/sayHello');
-const { getUsers, registerUser, login, me, createAdmin,} = require('./controller/user');
+const { getActiveUsers, registerUser, login, me, createAdmin, getActiveUserProfile,} = require('./controller/user');
 const { isAuth, isAdmin } = require('./middlewares/auth');
 
+
 const { sequelize } = require('./config/db');
+const { canRatePost } = require('./middlewares/canRatePost');
+const { checkUserStatus } = require('./middlewares/checkUserStatus');
+const { isOwnerOfComment } = require('./middlewares/isOwnerOfComment');
+const { isOwnerOfPost } = require('./middlewares/isOwnerOfPost');
 const server = express();
 
 server.use(express.json())
@@ -22,7 +27,7 @@ server.use((req, res, next) => {
 
 
 server.get('/', sayHello)
-server.get('/users', isAuth, getUsers)
+server.get('/users', isAuth, getActiveUsers)
 server.get('/me', isAuth, me)
 server.post('/users', registerUser)
 server.post('/login', login)
