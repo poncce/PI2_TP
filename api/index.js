@@ -3,13 +3,14 @@ const express = require('express');
 const { sayHello } = require('./controller/sayHello');
 const { getActiveUsers, registerUser, login, me, createAdmin, getActiveUserProfile,} = require('./controller/user');
 const { isAuth, isAdmin } = require('./middlewares/auth');
-
-
-const { sequelize } = require('./config/db');
 const { canRatePost } = require('./middlewares/canRatePost');
 const { checkUserStatus } = require('./middlewares/checkUserStatus');
 const { isOwnerOfComment } = require('./middlewares/isOwnerOfComment');
 const { isOwnerOfPost } = require('./middlewares/isOwnerOfPost');
+
+
+const { sequelize } = require('./config/db');
+const { createPost } = require('./controller/post');
 const server = express();
 
 server.use(express.json())
@@ -31,7 +32,9 @@ server.get('/users', isAuth, getActiveUsers)
 server.get('/me', isAuth, me)
 server.post('/users', registerUser)
 server.post('/login', login)
-server.post('/admin/create', createAdmin)   // checkear con malcos
+server.post('/admin/create', createAdmin)
+server.get('/users/profile', isAuth, getActiveUserProfile)
+server.post('/posts', isAuth, checkUserStatus, createPost)
 
 
 
