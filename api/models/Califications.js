@@ -18,6 +18,9 @@ const Calification = sequelize.define('Calificacion', {
             max: 5
         }
     }
+}, {
+    timestamps: false,
+    modelName: 'Calificacion'
 });
 
     module.exports = {
