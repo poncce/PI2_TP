@@ -19,6 +19,9 @@ const Post = sequelize.define('Post' , {
         defaultValue: DataTypes.NOW,
     },
     
+}, {
+    timestamps: false,
+    modelName: 'Post'
 });
 
     module.exports = {
