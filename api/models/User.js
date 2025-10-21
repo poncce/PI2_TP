@@ -2,12 +2,10 @@
     const { DataTypes } = require('sequelize');
 
 const User = sequelize.define('Usuario', {
-    firstName: {
+    username: {
         type: DataTypes.STRING,
+        unique: true,
         allowNull: false,
-    },
-    lastName: {
-        type: DataTypes.STRING,
     },
     email: {
         type: DataTypes.STRING,
@@ -27,7 +25,8 @@ const User = sequelize.define('Usuario', {
     },
     estado: {
         type: DataTypes.ENUM('activo', 'bloqueado', 'inactivo'),
-        defaultValue: 'activo'
+        defaultValue: 'activo',
+        allowNull: true
     }
 }, {
     timestamps: false,
