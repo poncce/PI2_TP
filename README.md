@@ -18,13 +18,13 @@ Pegar las sentencias del bd.sql y ejecutar
 cd PI2_TP/api
 npm install express
 
-💻 Iniciar el frontend
+💻 Arrancar el frontend
 
 cd PI2_TP/client
 npm run dev
 
 
-💻  Iniciar el backend
+💻  Arrancar el backend
 
 PI2_TP/api
 npm start
