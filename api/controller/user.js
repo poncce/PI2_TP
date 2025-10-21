@@ -1,6 +1,9 @@
 const { User } = require("../models/User")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { Califications } = require("../models/Calification")
+
+
 
 
 const SECRET = 'misecreto'
@@ -20,15 +23,15 @@ const getActiveUserProfile = async (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-    const { firstName, lastName, email, password, estado } = req.body
+    const { username, email, password, estado } = req.body
     const hashedPassword = await bcrypt.hash(password, 10)
     const user = await User.create({
-        firstName,
-        lastName,
+        username,
         email,
         password: hashedPassword,
         isAdmin: false,
         estado
+        
     })
     res.json(user)
 }
@@ -58,11 +61,10 @@ const me = async (req, res) => {
 }
 
 const createAdmin = async (req, res) => {                           // checkear con marcos, no es serio hacerlo desde un endpoint xd
-    const { firstName, lastName, email, password } = req.body
+    const { username, email, password } = req.body
     const hashedPassword = await bcrypt.hash(password, 10)
     const user = await User.create({
-        firstName,
-        lastName,
+        username,
         email,
         password: hashedPassword,
         isAdmin: true
