@@ -18,6 +18,9 @@ const Comment = sequelize.define('Comentario', {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
     },
+}, {
+    timestamps: false,
+    modelName: 'Comentario'
 })
 
     module.exports = {
