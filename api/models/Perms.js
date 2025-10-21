@@ -15,6 +15,9 @@ const Permission = sequelize.define('Permiso', {
     tipo: {
         type: DataTypes.STRING
     },
+}, {
+    timestamps: false,
+    modelName: 'Permiso'
 })
 
     module.exports = {
