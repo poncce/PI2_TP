@@ -29,5 +29,6 @@ async function addComment(req, res) {
 }
 
 module.exports = {
-  agregarComentario: addComment
+  addComment
+
 }
