@@ -2,6 +2,8 @@
 const express = require('express');
 const { sequelize } = require('./config/db');
 
+
+
 // Controllers
 const { 
   getActiveUsers,
@@ -14,6 +16,7 @@ const {
 const { createPost } = require('./controller/post');
 const { addComment } = require('./controller/comment');
 const { calificatePost } = require('./controller/calification');
+const { sendFriendRequest } = require('./controller/friendship');
 
 // Middlewares
 const { isAuth, isAdmin } = require('./middlewares/auth');
@@ -55,6 +58,12 @@ server.post('/posts/:postId/comments', isAuth, checkUserStatus, addComment)
 
 // Calificar
 server.post('/posts/:postId/calification', isAuth, canRatePost, calificatePost)
+
+
+// Amistad
+server.post('/friend-request', isAuth, checkUserStatus, sendFriendRequest)
+
+
 
 
 // Arrancar server
