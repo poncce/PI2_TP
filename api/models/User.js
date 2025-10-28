@@ -1,40 +1,31 @@
-    const { sequelize } = require("../config/db");
-    const { DataTypes } = require('sequelize');
-
-const User = sequelize.define('Usuario', {
-    username: {
-        type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
+module.exports = (sequelize, DataTypes) => {
+  return sequelize.define('Usuario', {
+    id: {
+      type: DataTypes.BIGINT.UNSIGNED,
+      primaryKey: true,
+      autoIncrement: true
     },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: true,
-        }
+    username: {
+      type: DataTypes.STRING(100),
+      allowNull: false,
+      unique: true
     },
     password: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING(255),
+      allowNull: false
     },
-    isAdmin: {  
-        type: DataTypes.BOOLEAN,
-        defaultValue: false  
+    email: {
+      type: DataTypes.STRING(255),
+      allowNull: true
     },
-    estado: {
-        type: DataTypes.ENUM('activo', 'bloqueado', 'inactivo'),
-        defaultValue: 'activo',
-        allowNull: true
+    dvh: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     }
-}, {
-    timestamps: false,
-    modelName: 'Usuario'
-},
-);
-
-
-    module.exports = {
-        User
-    };
+  }, {
+    timestamps: true,
+    modelName: 'Usuario',
+    tableName: 'usuarios',
+    underscored: true
+  });
+};

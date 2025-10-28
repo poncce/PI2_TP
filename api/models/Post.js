@@ -1,29 +1,27 @@
-const { sequelize } = require("../config/db");
-const { DataTypes } = require('sequelize');
-
-const Post = sequelize.define('Post' , {
-    autorId: { // como poner foreign key, seria el id del usuario
-        type: DataTypes.INTEGER,
-        allowNull: false,
+module.exports = (sequelize, DataTypes) => {
+  return sequelize.define('Post', {
+    autorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     titulo: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false
     },
     contenido: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    dvh: {
+      type: DataTypes.INTEGER,
+      allowNull: true
     },
     fechaPublicacion: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
-    },
-    
-}, {
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW
+    }
+  }, {
     timestamps: false,
     modelName: 'Post'
-});
-
-    module.exports = {
-        Post
-    };
+  });
+};
