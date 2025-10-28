@@ -12,11 +12,13 @@ const {
   getActiveUserProfile,
 } = require('./controller/user');
 const { createPost } = require('./controller/post');
+const { addComment } = require('./controller/comment');
+const { calificatePost } = require('./controller/calification');
 
 // Middlewares
 const { isAuth, isAdmin } = require('./middlewares/auth');
 const { checkUserStatus } = require('./middlewares/checkUserStatus');
-const { agregarComentario: addComment } = require('./controller/comment');
+const { canRatePost } = require('./middlewares/canRatePost');
 
 const server = express();
 server.use(express.json());
@@ -51,6 +53,8 @@ server.post('/posts', isAuth, checkUserStatus, createPost);
 // Comentarios
 server.post('/posts/:postId/comments', isAuth, checkUserStatus, addComment)
 
+// Calificar
+server.post('/posts/:postId/calification', isAuth, canRatePost, calificatePost)
 
 
 // Arrancar server
