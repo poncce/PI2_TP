@@ -19,7 +19,7 @@ const { calificatePost } = require('./controller/calification');
 const { isAuth, isAdmin } = require('./middlewares/auth');
 const { checkUserStatus } = require('./middlewares/checkUserStatus');
 const { canRatePost } = require('./middlewares/canRatePost');
-const { sendFriendRequest } = require('./controller/friendship');
+const { sendFriendRequest, acceptFriendRequest, rejectFriendRequest, getPendingRequests } = require('./controller/friendship');
 
 const server = express();
 server.use(express.json());
@@ -53,7 +53,11 @@ server.post('/posts/:postId/comments', isAuth, checkUserStatus, addComment);
 server.post('/posts/:postId/calification', isAuth, canRatePost, calificatePost);
 
 // Amistad
- server.post('/friend-request', isAuth, checkUserStatus, sendFriendRequest);
+server.post('/friend-request', isAuth, checkUserStatus, sendFriendRequest);
+server.put('/friend-request/:friendshipId/accept', isAuth, checkUserStatus, acceptFriendRequest);
+server.put('/friend-request/:friendshipId/reject', isAuth, checkUserStatus, rejectFriendRequest);
+server.get('/friend-requests/pending', isAuth, getPendingRequests);
+
 
  
 
@@ -63,7 +67,7 @@ async function startServer() {
     console.log('Base de datos conectada');
 
 
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
     console.log('Tablas sincronizadas');
 
     server.listen(3000, () => {
