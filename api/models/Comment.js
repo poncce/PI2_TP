@@ -1,27 +1,25 @@
-module.exports = (sequelize, DataTypes) => {
-  return sequelize.define('Comentario', {
+const { sequelize } = require("../config/db");
+const { DataTypes } = require('sequelize');
+
+const Comment = sequelize.define('Comentario', {
     PostId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
     autorId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+        type: DataTypes.INTEGER,
+        allowNull: false,
     },
     contenido: {
-      type: DataTypes.TEXT,
-      allowNull: false
+        type: DataTypes.TEXT,
+        allowNull: false,
     },
     fechaComentario: {
-      type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW,
     },
-    dvh: {
-      type: DataTypes.INTEGER,
-      allowNull: true
+})
+
+    module.exports = {
+        Comment
     }
-  }, {
-    timestamps: false,
-    modelName: 'Comentario'
-  });
-};
