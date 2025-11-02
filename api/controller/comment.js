@@ -29,4 +29,6 @@ async function addComment(req, res) {
   res.status(201).json({ message: "Comentario agregado exitosamente", comment: comentario });
 }
 
-module.exports = { agregarComentario: addComment };
+module.exports = {
+  addComment
+}
