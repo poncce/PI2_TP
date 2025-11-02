@@ -1,3 +1,4 @@
+// config/db.js
 const mysql = require('mysql2/promise');
 const { Sequelize } = require('sequelize');
 
@@ -6,6 +7,17 @@ const DB_USER = process.env.DB_USER || 'root';
 const DB_PASS = process.env.DB_PASS || '';
 const DB_HOST = process.env.DB_HOST || 'localhost';
 const DB_DIALECT = 'mysql';
+
+// Crear la instancia de sequelize
+const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
+  host: DB_HOST,
+  dialect: DB_DIALECT,
+  logging: false,
+  define: {
+    timestamps: true,
+    underscored: false
+  }
+});
 
 async function initDatabase() {
   let connection;
@@ -21,16 +33,6 @@ async function initDatabase() {
       `CREATE DATABASE IF NOT EXISTS \`${DB_NAME}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;`
     );
 
-    const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
-      host: DB_HOST,
-      dialect: DB_DIALECT,
-      logging: false,
-      define: {
-        timestamps: true,
-        underscored: false
-      }
-    });
-
     await sequelize.authenticate();
 
     return sequelize;
@@ -42,8 +44,8 @@ async function initDatabase() {
   }
 }
 
-async function ensureTables(modelsObj, sequelize) {
-  const qi = sequelize.getQueryInterface();
+async function ensureTables(modelsObj, sequelizeInstance) {
+  const qi = sequelizeInstance.getQueryInterface();
   const models = Object.entries(modelsObj).filter(([k, v]) => typeof v === 'function' || (v && v.name));
 
   for (const [name, model] of models) {
@@ -64,4 +66,4 @@ async function ensureTables(modelsObj, sequelize) {
   }
 }
 
-module.exports = { initDatabase, ensureTables };
+module.exports = { initDatabase, ensureTables, sequelize };
