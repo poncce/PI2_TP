@@ -1,7 +1,7 @@
 const { sequelize } = require("../config/db");
 const { DataTypes } = require('sequelize');
 
-const Usuario = sequelize.define('Usuario', {
+const User = sequelize.define('Usuario', {
   id: {
     type: DataTypes.BIGINT.UNSIGNED,
     primaryKey: true,
@@ -20,6 +20,11 @@ const Usuario = sequelize.define('Usuario', {
     type: DataTypes.STRING(255),
     allowNull: true
   },
+  estado: {
+    type: DataTypes.STRING(50),
+    allowNull: false,
+    defaultValue: 'activo'
+  },
   dvh: {
     type: DataTypes.INTEGER,
     allowNull: true
@@ -29,5 +34,5 @@ const Usuario = sequelize.define('Usuario', {
 });
 
 module.exports = {
-  Usuario
+  User
 };
