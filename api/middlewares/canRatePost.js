@@ -1,3 +1,5 @@
+const { Calification } = require("../models/Calification");
+
 const canRatePost = async (req, res, next) => {
   const userId = req.user.id;
   const postId = req.params.postId;
@@ -8,6 +10,8 @@ const canRatePost = async (req, res, next) => {
   }
   next();
 };
+
+
 
 module.exports = {
     canRatePost
