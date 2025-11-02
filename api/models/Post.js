@@ -9,11 +9,7 @@ const Post = sequelize.define('Post', {
   },
   autorId: {
     type: DataTypes.BIGINT.UNSIGNED,
-    allowNull: false,
-    references: {
-      model: 'usuarios',
-      key: 'id'
-    }
+    allowNull: false
   },
   titulo: {
     type: DataTypes.STRING,

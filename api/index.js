@@ -63,7 +63,7 @@ async function startServer() {
     console.log('Base de datos conectada');
 
 
-    await sequelize.sync({ force: false });
+    await sequelize.sync({ force: true });
     console.log('Tablas sincronizadas');
 
     server.listen(3000, () => {
