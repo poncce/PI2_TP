@@ -1,74 +1,80 @@
-// api/controller/user.js
-const jwt = require('jsonwebtoken');
-const SECRET = 'misecreto';
+const { User } = require("../models/User")
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const { Califications } = require("../models/Calification")
 
-async function registerUser(req, res) {
-  try {
-    const db = req.app.get('db');
-    if (!db || !db.User) return res.status(500).json({ error: 'DB no inicializada' });
+const SECRET = 'misecreto'
 
-    const { username, password, email } = req.body;
-    if (!username || !password || !email) return res.status(400).json({ error: 'Faltan campos' });
-
-    const existing = await db.User.findOne({ where: { username } });
-    if (existing) return res.status(409).json({ error: 'Usuario ya existe' });
-
-    const user = await db.User.create({ username, password, email });
-    return res.status(201).json({ id: user.id, username: user.username, email: user.email });
-  } catch (err) {
-    console.error('registerUser error', err);
-    return res.status(500).json({ error: 'Error del servidor' });
-  }
+const getActiveUsers = async (req, res) => {
+    const users = await User.findAll({ attributes: { exclude: ['password'] } })
+    res.json(users)
 }
 
-async function login(req, res) {
-  try {
-    const db = req.app.get('db');
-    if (!db || !db.User) return res.status(500).json({ error: 'DB no inicializada' });
 
-    const { username, password } = req.body;
-    if (!username || !password) return res.status(400).json({ error: 'Faltan campos' });
+const getActiveUserProfile = async (req, res) => {
+    const user = await User.findByPk(req.user.id, { attributes: { exclude: ['password'] } });
+    if (!user) {
+        return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+    res.json(user);
+};
 
-    const user = await db.User.findOne({ where: { username } });
-    if (!user) return res.status(401).json({ error: 'Credenciales inválidas' });
-
-    const match = typeof user.comparePassword === 'function'
-      ? await user.comparePassword(password)
-      : user.password === password;
-
-    if (!match) return res.status(401).json({ error: 'Credenciales inválidas' });
-
-    const token = jwt.sign({ id: user.id, username: user.username }, SECRET, { expiresIn: '1h' });
-    return res.json({ token });
-  } catch (err) {
-    console.error('login error', err);
-    return res.status(500).json({ error: 'Error del servidor' });
-  }
+const registerUser = async (req, res) => {
+    const { username, email, password, estado } = req.body
+    const hashedPassword = await bcrypt.hash(password, 10)
+    const user = await User.create({
+        username,
+        email,
+        password: hashedPassword,
+        isAdmin: false,
+        estado
+        
+    })
+    res.json(user)
 }
 
-async function me(req, res) {
-  try {
-    const db = req.app.get('db');
-    const user = await db.User.findByPk(req.user.id, { attributes: ['id', 'username', 'email'] });
-    if (!user) return res.status(404).json({ error: 'Usuario no encontrado' });
-    return res.json(user);
-  } catch (err) {
-    console.error('me error', err);
-    return res.status(500).json({ error: 'Error del servidor' });
-  }
+       
+
+const login = async (req, res) => {
+    const { email, password } = req.body
+    const user = await User.findOne({ where: { email } })
+    if (!user) return res.status(400).json({ message: "usuario no encontrado" })
+
+    const compare = await bcrypt.compare(password, user.password)
+    if (!compare) return res.status(400).json({ message: "usuario o contraseña incorrecta" })
+
+    const token = jwt.sign(
+        { id: user.id, email: user.email, isAdmin: user.isAdmin },
+        SECRET,
+        { expiresIn: '8h' }
+    )
+
+    res.json({ token })
 }
 
-async function getActiveUsers(req, res) {
-  const db = req.app.get('db');
-  const users = await db.User.findAll({ where: { active: true }, attributes: ['id', 'username', 'email'] });
-  return res.json(users);
+const me = async (req, res) => {
+    const user = await User.findByPk(req.user.id, { attributes: { exclude: ['password'] } })
+    res.json(user)
+}
+
+const createAdmin = async (req, res) => {                           // checkear con marcos, no es serio hacerlo desde un endpoint xd
+    const { username, email, password } = req.body
+    const hashedPassword = await bcrypt.hash(password, 10)
+    const user = await User.create({
+        username,
+        email,
+        password: hashedPassword,
+        isAdmin: true
+    })
+    res.json(user)
 }
 
 module.exports = {
-  getActiveUsers,
-  registerUser,
-  login,
-  me,
-  createAdmin: async (req, res) => res.status(501).json({ error: 'No implementado' }),
-  getActiveUserProfile: async (req, res) => res.status(501).json({ error: 'No implementado' })
-};
+    getActiveUsers,
+    getActiveUserProfile,
+    registerUser,
+    createAdmin,
+    login,
+    me,
+    createAdmin
+}
