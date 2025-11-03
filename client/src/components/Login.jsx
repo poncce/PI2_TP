@@ -11,7 +11,10 @@ export default function Login() {
 
   const fetchLogin = async () => {
     try {
-      const { data } = await axios.post("http://localhost:3000/login", { email, password });
+      const { data } = await axios.post("http://localhost:3000/login", {
+        email,
+        password,
+      });
       localStorage.setItem("token", data.token);
       alert("Login exitoso");
       navigate("/inicio");
@@ -28,8 +31,8 @@ export default function Login() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        bgcolor: "#0f172a", // azul oscuro
-        color: "white",
+        background: "linear-gradient(135deg, #ffffff 40%, #ffedd5 100%)", // blanco a naranja suave
+        color: "#1e1e1e",
       }}
     >
       <Paper
@@ -39,11 +42,11 @@ export default function Login() {
           width: "100%",
           maxWidth: 400,
           textAlign: "center",
-          bgcolor: "#1e293b", // tarjeta gris oscura
+          bgcolor: "#fff7ed", // naranja muy claro
           borderRadius: 3,
         }}
       >
-        <Typography variant="h5" sx={{ mb: 3, fontWeight: 700, color: "#fff" }}>
+        <Typography variant="h5" sx={{ mb: 3, fontWeight: 700, color: "#f97316" }}>
           Iniciar sesión
         </Typography>
 
@@ -55,11 +58,11 @@ export default function Login() {
           onChange={(e) => setEmail(e.target.value)}
           sx={{
             mb: 2,
-            input: { color: "#fff" },
-            label: { color: "#94a3b8" },
+            input: { color: "#1e1e1e" },
+            label: { color: "#9ca3af" },
             "& .MuiOutlinedInput-root": {
-              "& fieldset": { borderColor: "#334155" },
-              "&:hover fieldset": { borderColor: "#38bdf8" },
+              "& fieldset": { borderColor: "#e5e7eb" },
+              "&:hover fieldset": { borderColor: "#f97316" },
             },
           }}
         />
@@ -72,11 +75,11 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           sx={{
             mb: 3,
-            input: { color: "#fff" },
-            label: { color: "#94a3b8" },
+            input: { color: "#1e1e1e" },
+            label: { color: "#9ca3af" },
             "& .MuiOutlinedInput-root": {
-              "& fieldset": { borderColor: "#334155" },
-              "&:hover fieldset": { borderColor: "#38bdf8" },
+              "& fieldset": { borderColor: "#e5e7eb" },
+              "&:hover fieldset": { borderColor: "#f97316" },
             },
           }}
         />
@@ -88,18 +91,23 @@ export default function Login() {
           sx={{
             py: 1.2,
             fontWeight: 600,
-            bgcolor: "#38bdf8",
-            "&:hover": { bgcolor: "#0ea5e9" },
+            bgcolor: "#f97316",
+            "&:hover": { bgcolor: "#ea580c" },
+            borderRadius: 2,
           }}
         >
           Entrar
         </Button>
 
-        <Typography variant="body2" sx={{ mt: 2, color: "#94a3b8" }}>
+        <Typography variant="body2" sx={{ mt: 2, color: "#6b7280" }}>
           ¿No tenés cuenta?{" "}
           <Link
             to="/register"
-            style={{ color: "#38bdf8", textDecoration: "none", fontWeight: 600 }}
+            style={{
+              color: "#f97316",
+              textDecoration: "none",
+              fontWeight: 600,
+            }}
           >
             Registrate acá
           </Link>
@@ -108,4 +116,3 @@ export default function Login() {
     </Box>
   );
 }
-    
