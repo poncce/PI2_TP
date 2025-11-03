@@ -16,8 +16,7 @@ const { calificatePost } = require('./controller/calification');
 // const { sendFriendRequest } = require('./controller/friendship');
 
 // Middlewares
-const { isAuth, isAdmin } = require('./middlewares/auth');
-const { checkUserStatus } = require('./middlewares/checkUserStatus');
+const { isAuth, isAdmin, checkUserStatus } = require('./middlewares/auth');
 const { canRatePost } = require('./middlewares/canRatePost');
 const { sendFriendRequest, acceptFriendRequest, rejectFriendRequest, getPendingRequests } = require('./controller/friendship');
 

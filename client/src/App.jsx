@@ -1,9 +1,10 @@
 // src/App.jsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/login.jsx";
-import Register from "./components/register.jsx";
+import Register from "./components/Register.jsx";
 import Home from "./components/Home.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import NewPost from "./components/NewPost.jsx";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/nueva-receta" element={<NewPost />} />
       </Routes>
     </BrowserRouter>
   );
