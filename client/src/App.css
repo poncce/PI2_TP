@@ -3,10 +3,6 @@ html, body, #root {
   margin: 0;
   padding: 0;
   width: 100%;
-  background-color: #0f172a; /* fondo oscuro global */
-  color: #fff;
-  display: flex;
-  flex-direction: column;
 }
 
 body {
@@ -14,11 +10,11 @@ body {
 }
 
 /* Opcional: centra el contenido en pantallas grandes */
+
 #root {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  /* Nada de max-width ni padding acá */
+  background-color: #0f172a; /* modo oscuro global */
+  color: #fff;
 }
 
 .logo {

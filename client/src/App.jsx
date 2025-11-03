@@ -5,15 +5,12 @@ import Register from "./components/register.jsx";
 import Home from "./components/Home.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 
-function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* Ruta principal = Login */}
         <Route path="/" element={<Login />} />
-        {/* Registro */}
         <Route path="/register" element={<Register />} />
-        {/* Página protegida (solo si hay token) */}
         <Route
           path="/inicio"
           element={
@@ -26,5 +23,3 @@ function App() {
     </BrowserRouter>
   );
 }
-
-export default App;
