@@ -1,24 +1,30 @@
-import Button from '@mui/material/Button'
-import './App.css'
-import Login from './components/login.jsx'
-import Register from './components/register.jsx'
-import UserList from './components/UserList.jsx'
-
+// src/App.jsx
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./components/login.jsx";
+import Register from "./components/register.jsx";
+import Home from "./components/Home.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 
 function App() {
-  const logout = async ()=>{
-    localStorage.setItem('token', '')
-    alert('Deslogeo exitoso')
-  }
   return (
-    <>
-      <Login />
-      <Register />
-      <UserList />
-      <Button variant='contained' color='error' onClick={logout}>Logout</Button>
-      
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        {/* Ruta principal = Login */}
+        <Route path="/" element={<Login />} />
+        {/* Registro */}
+        <Route path="/register" element={<Register />} />
+        {/* Página protegida (solo si hay token) */}
+        <Route
+          path="/inicio"
+          element={
+            <PrivateRoute>
+              <Home />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
