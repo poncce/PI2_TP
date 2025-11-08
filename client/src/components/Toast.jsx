@@ -44,7 +44,9 @@ export const ToastContainer = ({ toasts, closeToast, removeToast }) => {
             closeToast(t.id); // dispara animación de salida
           }}
           // Recién después de animar, lo removemos
-          onExited={() => removeToast(t.id)}
+          TransitionProps={{
+            onExited: () => removeToast(t.id)
+          }}
           sx={{ zIndex: 9999 }}
         >
           <Alert

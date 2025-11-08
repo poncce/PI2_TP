@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { Box, AppBar, Toolbar, Typography, Button, Container, Paper, Grid, Card, CardContent, CardActions, Avatar, IconButton, Menu, MenuItem, Chip } from '@mui/material';
 import { LogOut, User, ChefHat, BookOpen, Star, Clock, Users, Settings, Bell, Plus, TrendingUp, Heart } from 'lucide-react';
 import { useToast, ToastContainer } from './Toast';
-import ThemeToggle from './ThemeToggle';
 
 function Home() {
   const navigate = useNavigate();
@@ -95,13 +94,13 @@ function Home() {
     <>
       <ToastContainer toasts={toasts} removeToast={removeToast} />
 
-      <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}> {/* Cambio aquí */}
+      <Box sx={{ minHeight: '100vh', bgcolor: '#fafaf9' }}>
         {/* Header/AppBar */}
         <AppBar
           position="static"
           sx={{
-            bgcolor: 'background.paper',
-            color: 'text.primary',
+            bgcolor: '#ffffff',
+            color: '#1e293b',
             boxShadow: '0 1px 3px 0 rgb(0 0 0 / 0.1)'
           }}
         >
@@ -114,7 +113,7 @@ function Home() {
             <Button
               variant="contained"
               startIcon={<Plus className="w-4 h-4" />}
-              onClick={() => navigate('/nueva-receta')} // ← Navega a la página
+              onClick={() => navigate('/nueva-receta-avanzada')} // ← Navega a la nueva página avanzada
               sx={{
                 mr: 2,
                 bgcolor: '#f97316',
@@ -126,9 +125,7 @@ function Home() {
               Nueva Receta
             </Button>
 
-            {/* 👇 ThemeToggle agregado aquí */}
-            <ThemeToggle />
-
+  
             <IconButton sx={{ mr: 1, ml: 1, color: '#64748b' }}>
               <Bell className="w-5 h-5" />
             </IconButton>
@@ -220,7 +217,7 @@ function Home() {
                 <Typography variant="h5" sx={{ fontWeight: 700, color: '#f97316' }}>
                   24
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="#64748b">
                   Mis Recetas
                 </Typography>
               </Paper>
@@ -231,7 +228,7 @@ function Home() {
                 <Typography variant="h5" sx={{ fontWeight: 700, color: '#ef4444' }}>
                   87
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="#64748b">
                   Me Gusta
                 </Typography>
               </Paper>
@@ -242,7 +239,7 @@ function Home() {
                 <Typography variant="h5" sx={{ fontWeight: 700, color: '#8b5cf6' }}>
                   156
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="#64748b">
                   Seguidores
                 </Typography>
               </Paper>
@@ -253,7 +250,7 @@ function Home() {
                 <Typography variant="h5" sx={{ fontWeight: 700, color: '#f59e0b' }}>
                   4.7
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="#64748b">
                   Calificación
                 </Typography>
               </Paper>
@@ -261,7 +258,7 @@ function Home() {
           </Grid>
 
           {/* Categories Grid */}
-          <Typography variant="h5" sx={{ fontWeight: 700, mb: 3, color: 'text.primary' }}>
+          <Typography variant="h5" sx={{ fontWeight: 700, mb: 3, color: '#1e293b' }}>
             ¿Qué te gustaría hacer?
           </Typography>
           <Grid container spacing={3} sx={{ mb: 4 }}>
@@ -296,7 +293,7 @@ function Home() {
                     <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
                       {category.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="#64748b">
                       {category.description}
                     </Typography>
                   </CardContent>
@@ -318,7 +315,7 @@ function Home() {
 
           {/* Popular Recipes Section */}
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-            <Typography variant="h5" sx={{ fontWeight: 700, color: 'text.primary' }}>
+            <Typography variant="h5" sx={{ fontWeight: 700, color: '#1e293b' }}>
               🔥 Recetas Populares
             </Typography>
             <Button
@@ -347,7 +344,7 @@ function Home() {
                   <Box
                     sx={{
                       height: 180,
-                      bgcolor: 'background.paper',
+                      bgcolor: '#ffffff',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -362,7 +359,7 @@ function Home() {
                     <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
                       {recipe.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                    <Typography variant="body2" color="#64748b" sx={{ mb: 2 }}>
                       Por {recipe.author}
                     </Typography>
                     <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 2 }}>

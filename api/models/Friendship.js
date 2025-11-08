@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../config/db");
+const { configurarHooksBitacora, nivelesCriticidad } = require('./hooks/bitacora');
 
 const Friendship = sequelize.define('Friendship', {
   userId: {
@@ -24,7 +25,15 @@ const Friendship = sequelize.define('Friendship', {
     allowNull: false,
   }
 }, {
-  timestamps: false
+  timestamps: true
+});
+
+// Configurar hooks de bitácora para el modelo Friendship
+configurarHooksBitacora(Friendship, 'Friendship', {
+  criticidad: nivelesCriticidad.administracion, // Operaciones de amistad son administrativas
+  registrarCreacion: true,
+  registrarModificacion: true,
+  registrarBorrado: true
 });
 
 module.exports = {

@@ -4,7 +4,6 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Box, Paper, TextField, Button, Typography } from "@mui/material";
 import { ToastContainer, useToast } from "../components/Toast";
-import ThemeToggle from "./ThemeToggle";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -65,15 +64,10 @@ export default function Login() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          bgcolor: "background.default",
-          color: "text.primary",
-          position: "relative"
+          bgcolor: "#fafaf9",
+          color: "#1e293b"
         }}
       >
-        {/* ThemeToggle en esquina superior derecha */}
-        <Box sx={{ position: "absolute", top: 20, right: 20 }}>
-          <ThemeToggle />
-        </Box>
 
         <Paper
           elevation={8}
@@ -82,7 +76,7 @@ export default function Login() {
             width: "100%",
             maxWidth: 400,
             textAlign: "center",
-            bgcolor: "background.paper",
+            bgcolor: "#ffffff",
             borderRadius: 3,
           }}
         >

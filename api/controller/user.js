@@ -2,6 +2,7 @@
 const { User } = require("../models/User")
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const { agregarContexto } = require('../middlewares/contextMiddleware')
 
 const SECRET = 'misecreto'
 
@@ -29,34 +30,38 @@ const getActiveUserProfile = async (req, res) => {
 const registerUser = async (req, res) => {
     try {
         const { username, email, password, estado } = req.body
-        
+
         // Validación adicional en el controlador (sanitización)
         const cleanUsername = username.trim().replace(/\s+/g, '');
         const cleanEmail = email ? email.trim().replace(/\s+/g, '') : null;
-        
+
         const hashedPassword = await bcrypt.hash(password, 10)
+
+        // Agregar contexto de la operación
+        const opciones = agregarContexto(req);
+
         const user = await User.create({
             username: cleanUsername,
             email: cleanEmail,
             password: hashedPassword,
             isAdmin: false,
             estado
-        })
-        
+        }, opciones)
+
         const userResponse = user.toJSON();
         delete userResponse.password;
-        
+
         res.status(201).json(userResponse)
     } catch (error) {
         if (error.name === 'SequelizeValidationError') {
-            return res.status(400).json({ 
-                message: 'Error de validación', 
-                errors: error.errors.map(e => e.message) 
+            return res.status(400).json({
+                message: 'Error de validación',
+                errors: error.errors.map(e => e.message)
             })
         }
         if (error.name === 'SequelizeUniqueConstraintError') {
-            return res.status(400).json({ 
-                message: 'El username o email ya está en uso' 
+            return res.status(400).json({
+                message: 'El username o email ya está en uso'
             })
         }
         res.status(500).json({ message: error.message })

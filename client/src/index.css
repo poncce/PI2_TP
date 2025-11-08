@@ -8,8 +8,8 @@ html, body, #root {
 
 #root {
   /* Nada de max-width ni padding acá */
-  background-color: #0f172a; /* modo oscuro global */
-  color: #fff;
+  background-color: #fafaf9; /* modo claro */
+  color: #1e293b;
 }
 
 /* Animación para los toasts */

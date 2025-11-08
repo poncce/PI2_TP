@@ -1,5 +1,6 @@
 const { sequelize } = require("../config/db");
 const { DataTypes } = require('sequelize');
+const { configurarHooksBitacora, nivelesCriticidad } = require('./hooks/bitacora');
 
 const Calification = sequelize.define('Calificacion', {
     userId: {
@@ -19,10 +20,18 @@ const Calification = sequelize.define('Calificacion', {
         }
     }
 }, {
-    timestamps: false,
+    timestamps: true,
     modelName: 'Calificacion'
 });
 
-    module.exports = {
-        Calification
-    };
+// Configurar hooks de bitácora para el modelo Calificacion
+configurarHooksBitacora(Calification, 'Calificacion', {
+    criticidad: nivelesCriticidad.contenido, // Operaciones de calificación son de contenido
+    registrarCreacion: true,
+    registrarModificacion: true,
+    registrarBorrado: true
+});
+
+module.exports = {
+    Calification
+};

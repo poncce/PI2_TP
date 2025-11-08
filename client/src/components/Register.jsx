@@ -3,7 +3,6 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { Box, Paper, TextField, Button, Typography, Stack } from "@mui/material";
 import { useToast, ToastContainer } from "../components/Toast";
-import ThemeToggle from "./ThemeToggle";
 
 export default function Register() {
   const [form, setForm] = useState({
@@ -66,15 +65,10 @@ export default function Register() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          bgcolor: "background.default",
-          color: "text.primary",
-          position: "relative"
+          bgcolor: "#fafaf9",
+          color: "#1e293b"
         }}
       >
-        {/* ThemeToggle en esquina superior derecha */}
-        <Box sx={{ position: "absolute", top: 20, right: 20 }}>
-          <ThemeToggle />
-        </Box>
 
         <Paper
           elevation={8}
@@ -83,7 +77,7 @@ export default function Register() {
             width: "100%",
             maxWidth: 400,
             textAlign: "center",
-            bgcolor: "background.paper",
+            bgcolor: "#ffffff",
             borderRadius: 3,
           }}
         >
@@ -162,7 +156,7 @@ export default function Register() {
               Registrarme
             </Button>
 
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
+            <Typography variant="body2" sx={{ color: "#64748b" }}>
               ¿Ya tenés cuenta?{" "}
               <Link
                 to="/"

@@ -1,5 +1,6 @@
 const { sequelize } = require("../config/db");
 const { DataTypes } = require('sequelize');
+const { configurarHooksBitacora, nivelesCriticidad } = require('./hooks/bitacora');
 
 const Post = sequelize.define('Post', {
   id: {
@@ -12,7 +13,7 @@ const Post = sequelize.define('Post', {
     allowNull: false
   },
   titulo: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(200),
     allowNull: false
   },
   contenido: {
@@ -28,7 +29,16 @@ const Post = sequelize.define('Post', {
     defaultValue: DataTypes.NOW
   }
 }, {
-  timestamps: false
+  timestamps: false,
+  tableName: 'Posts'
+});
+
+// Configurar hooks de bitácora para el modelo Post
+configurarHooksBitacora(Post, 'Post', {
+  criticidad: nivelesCriticidad.contenido, // Operaciones de posts son de contenido
+  registrarCreacion: true,
+  registrarModificacion: true,
+  registrarBorrado: true
 });
 
 module.exports = {

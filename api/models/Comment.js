@@ -1,5 +1,6 @@
 const { sequelize } = require("../config/db");
 const { DataTypes } = require('sequelize');
+const { configurarHooksBitacora, nivelesCriticidad } = require('./hooks/bitacora');
 
 const Comment = sequelize.define('Comentario', {
     PostId: {
@@ -18,8 +19,19 @@ const Comment = sequelize.define('Comentario', {
         type: DataTypes.DATE,
         defaultValue: DataTypes.NOW,
     },
-})
+}, {
+    timestamps: true,
+    tableName: 'Comentarios'
+});
 
-    module.exports = {
-        Comment
-    }
+// Configurar hooks de bitácora para el modelo Comentario
+configurarHooksBitacora(Comment, 'Comentario', {
+    criticidad: nivelesCriticidad.contenido, // Operaciones de comentarios son de contenido
+    registrarCreacion: true,
+    registrarModificacion: true,
+    registrarBorrado: true
+});
+
+module.exports = {
+    Comment
+};

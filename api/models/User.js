@@ -1,6 +1,7 @@
 // models/User.js
 const { sequelize } = require("../config/db");
 const { DataTypes } = require('sequelize');
+const { configurarHooksBitacora, nivelesCriticidad } = require('./hooks/bitacora');
 
 const User = sequelize.define('Usuario', {
   id: {
@@ -79,6 +80,16 @@ const User = sequelize.define('Usuario', {
 }, {
   timestamps: true
 });
+
+// Configurar hooks de bitácora para el modelo Usuario
+console.log('⚙️ Configurando hooks de bitácora para el modelo Usuario...');
+configurarHooksBitacora(User, 'Usuario', {
+  criticidad: nivelesCriticidad.seguridad, // Operaciones de usuarios son de seguridad
+  registrarCreacion: true,
+  registrarModificacion: true,
+  registrarBorrado: true
+});
+console.log('✅ Hooks de bitácora configurados para Usuario');
 
 module.exports = {
   User
