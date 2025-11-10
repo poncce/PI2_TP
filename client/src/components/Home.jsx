@@ -113,7 +113,7 @@ function Home() {
             <Button
               variant="contained"
               startIcon={<Plus className="w-4 h-4" />}
-              onClick={() => navigate('/nueva-receta-avanzada')} // ← Navega a la nueva página avanzada
+              onClick={() => navigate('/nueva-receta')} // ← Navega a la nueva página avanzada
               sx={{
                 mr: 2,
                 bgcolor: '#f97316',
