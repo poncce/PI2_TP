@@ -42,6 +42,17 @@ const {
   searchPosts
 } = require('./controller/post');
 
+// Controllers para verificación de integridad
+const {
+  verificarIntegridadUsuarios,
+  verificarIntegridadPosts,
+  verificarRegistro,
+  verificacionCompleta
+} = require('./controller/integrityController');
+
+// Importar rutas
+const testRoutes = require('./routes/testRoutes');
+
 const server = express();
 server.use(express.json());
 
@@ -94,6 +105,14 @@ server.get('/bitacora/:id', isAuth, isAdmin, getBitacoraById);
 server.get('/bitacora/estadisticas', isAuth, isAdmin, getEstadisticas);
 server.delete('/bitacora/limpiar', isAuth, isAdmin, limpiarBitacora);
 
+// Verificación de integridad de datos (DVH) - solo administradores
+server.get('/integrity/usuarios', isAuth, isAdmin, verificarIntegridadUsuarios);
+server.get('/integrity/posts', isAuth, isAdmin, verificarIntegridadPosts);
+server.get('/integrity/:modelo/:id', isAuth, isAdmin, verificarRegistro);
+server.get('/integrity/completa', isAuth, isAdmin, verificacionCompleta);
+
+// Rutas de prueba
+server.use('/test', testRoutes);
 
 async function startServer() {
   try {
