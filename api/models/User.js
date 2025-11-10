@@ -2,6 +2,7 @@
 const { sequelize } = require("../config/db");
 const { DataTypes } = require('sequelize');
 const { configurarHooksBitacora, nivelesCriticidad } = require('./hooks/bitacora');
+const { beforeCreateDVH, afterCreateDVH, beforeUpdateDVH, afterUpdateDVH } = require('../middlewares/dvhMiddleware');
 
 const User = sequelize.define('Usuario', {
   id: {
@@ -74,11 +75,18 @@ const User = sequelize.define('Usuario', {
     defaultValue: false
   },
   dvh: {
-    type: DataTypes.INTEGER,
-    allowNull: true
+    type: DataTypes.STRING(8), // 8 caracteres hexadecimales
+    allowNull: false,
+    defaultValue: '00000000'
   }
 }, {
-  timestamps: true
+  timestamps: true,
+  hooks: {
+    beforeCreate: beforeCreateDVH,
+    afterCreate: afterCreateDVH,
+    beforeUpdate: beforeUpdateDVH,
+    afterUpdate: afterUpdateDVH
+  }
 });
 
 // Configurar hooks de bitácora para el modelo Usuario

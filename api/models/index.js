@@ -6,6 +6,7 @@ const { Friendship } = require('./Friendship');
 const { Calification } = require('./Calification');
 const { Permiso } = require('./Permission');
 const { Bitacora } = require('./Bitacora');
+const { DigitoVerificador } = require('./DigitoVerificador');
 
 // Importar todos los modelos para que se definan
 const models = {
@@ -15,7 +16,8 @@ const models = {
   Friendship,
   Calification,
   Permiso,
-  Bitacora
+  Bitacora,
+  DigitoVerificador
 };
 
 // Exportar todos los modelos
