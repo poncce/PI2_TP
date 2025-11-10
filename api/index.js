@@ -48,7 +48,7 @@ const {
   verificarIntegridadPosts,
   verificarRegistro,
   verificacionCompleta
-} = require('./controller/integrityController');
+} = require('./controller/dvh/integrityController');
 
 // Importar rutas
 const testRoutes = require('./routes/testRoutes');
