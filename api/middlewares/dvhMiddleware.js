@@ -1,4 +1,4 @@
-const { calcularDVH } = require('../utils/dvh');
+const { calcularDVH } = require('../controller/dvh/dvh');
 
 /**
  * Guarda el DVH en la tabla digitos_verificadores
