@@ -7,7 +7,6 @@ import PrivateRoute from "./components/PrivateRoute.jsx";
 import NewPost from "./components/NewPost.jsx";
 
 // Componentos básicos
-import AdvancedRecipeForm from "./components/AdvancedRecipeForm.jsx";
 import SimpleRecipeExplorer from "./components/SimpleRecipeExplorer.jsx";
 import RecipeView from "./components/RecipeView.jsx";
 import EditRecipeForm from "./components/EditRecipeForm.jsx";
@@ -26,14 +25,11 @@ export default function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/nueva-receta" element={<NewPost />} />
-
-        {/* Nuevas rutas para funcionalidades avanzadas */}
         <Route
-          path="/nueva-receta-avanzada"
+          path="/nueva-receta"
           element={
             <PrivateRoute>
-              <AdvancedRecipeForm />
+              <NewPost />
             </PrivateRoute>
           }
         />

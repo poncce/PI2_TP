@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { useToast, ToastContainer } from './Toast';
 import axios from 'axios';
+import logo from '../assets/logo.png';
 
 export default function RecipeView() {
   const { id } = useParams();
@@ -153,8 +154,33 @@ export default function RecipeView() {
                 <ArrowLeft className="w-6 h-6" />
               </IconButton>
 
-              <ChefHat className="w-8 h-8 mr-2" style={{ color: '#f97316' }} />
-              <Typography variant="h5" sx={{ fontWeight: 700, color: '#f97316', flexGrow: 1 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+                <img
+                  src={logo}
+                  alt="Logo"
+                  style={{
+                    height: '40px',
+                    width: 'auto',
+                    marginRight: '12px',
+                    transition: 'transform 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                  onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+                />
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: 700,
+                    color: '#f97316',
+                    fontSize: '1.5rem',
+                    letterSpacing: '0.5px'
+                  }}
+                >
+                  Paulina Cultiva
+                </Typography>
+              </Box>
+
+              <Typography variant="h6" sx={{ fontWeight: 600, color: '#64748b', mr: 2 }}>
                 {recipe.titulo}
               </Typography>
 

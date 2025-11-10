@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, AppBar, Toolbar, Typography, Button, Container, Paper, Grid, Card, CardContent, CardActions, Avatar, IconButton, Menu, MenuItem, Chip } from '@mui/material';
 import { LogOut, User, ChefHat, BookOpen, Star, Clock, Users, Settings, Bell, Plus, TrendingUp, Heart } from 'lucide-react';
+import logo from '../assets/logo.png';
 import { useToast, ToastContainer } from './Toast';
 
 function Home() {
@@ -105,15 +106,36 @@ function Home() {
           }}
         >
           <Toolbar>
-            <ChefHat className="w-8 h-8 mr-2" style={{ color: '#f97316' }} />
-            <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700, color: '#f97316' }}>
-              Recetas Compartidas
-            </Typography>
+            <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+              <img
+                src={logo}
+                alt="Logo"
+                style={{
+                  height: '40px',
+                  width: 'auto',
+                  marginRight: '12px',
+                  transition: 'transform 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+              />
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: '#f97316',
+                  fontSize: '1.5rem',
+                  letterSpacing: '0.5px'
+                }}
+              >
+                Paulina Cultiva
+              </Typography>
+            </Box>
 
             <Button
               variant="contained"
               startIcon={<Plus className="w-4 h-4" />}
-              onClick={() => navigate('/nueva-receta')} // ← Navega a la nueva página avanzada
+              onClick={() => navigate('/nueva-receta')}
               sx={{
                 mr: 2,
                 bgcolor: '#f97316',

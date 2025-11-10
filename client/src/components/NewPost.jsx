@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { ArrowLeft, ChefHat } from 'lucide-react';
 import axios from 'axios';
+import logo from '../assets/logo.png';
 import { useToast, ToastContainer } from './Toast';
 
 export default function NewPost() {
@@ -81,14 +82,38 @@ export default function NewPost() {
           }}
         >
           <Toolbar>
-            <IconButton 
+            <IconButton
               onClick={() => navigate('/inicio')}
               sx={{ mr: 2, color: '#64748b' }}
             >
               <ArrowLeft className="w-6 h-6" />
             </IconButton>
-            <ChefHat className="w-8 h-8 mr-2" style={{ color: '#f97316' }} />
-            <Typography variant="h6" sx={{ fontWeight: 700, color: '#f97316' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', flexGrow: 1 }}>
+              <img
+                src={logo}
+                alt="Logo"
+                style={{
+                  height: '40px',
+                  width: 'auto',
+                  marginRight: '12px',
+                  transition: 'transform 0.3s ease'
+                }}
+                onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
+                onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
+              />
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 700,
+                  color: '#f97316',
+                  fontSize: '1.5rem',
+                  letterSpacing: '0.5px'
+                }}
+              >
+                Paulina Cultiva
+              </Typography>
+            </Box>
+            <Typography variant="h6" sx={{ fontWeight: 600, color: '#64748b' }}>
               Nueva Receta
             </Typography>
           </Toolbar>
